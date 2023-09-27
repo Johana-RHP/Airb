@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Amenities</title>
+</head>
+<body>
+    <h2>Amenities</h2>
+    <div id="Amenities">
+        <input type="checkbox" class="amenity" value="1"> Amenity 1<br>
+        <input type="checkbox" class="amenity" value="2"> Amenity 2<br>
+        <input type="checkbox" class="amenity" value="3"> Amenity 3<br>
+    </div>
+    <h4>Selected Amenities:</h4>
+    <div id="selectedAmenities"></div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            // Initialize an empty array to store selected amenity IDs.
+            const selectedAmenities = [];
+
+            // Get all the checkboxes with the class 'amenity'.
+            const checkboxes = document.querySelectorAll(".amenity");
+
+            // Get the <h4> tag where we will display the selected amenities.
+            const selectedAmenitiesDisplay = document.getElementById("selectedAmenities");
+
+            // Function to update the selected amenities display.
+            function updateSelectedAmenities() {
+                selectedAmenitiesDisplay.textContent = "Selected Amenities: " + selectedAmenities.join(", ");
+            }
+
+            // Add change event listeners to each checkbox.
+            checkboxes.forEach(function(checkbox) {
+                checkbox.addEventListener("change", function() {
+                const amenityId = checkbox.value;
+
+                if (checkbox.checked) {
+                    // If the checkbox is checked, add the Amenity ID to the array.
+                    selectedAmenities.push(amenityId);
+                } else {
+                    // If the checkbox is unchecked, remove the Amenity ID from the array.
+                    const index = selectedAmenities.indexOf(amenityId);
+                    if (index !== -1) {
+                        selectedAmenities.splice(index, 1);
+                    }
+                }
+
+                // Update the display.
+                updateSelectedAmenities();
+                });
+            });
+        });
+    </script>
+</body>
+</html>
